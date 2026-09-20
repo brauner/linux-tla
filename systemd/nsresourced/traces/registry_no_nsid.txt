@@ -1,0 +1,46 @@
+Error: Invariant ManagedCoversLive is violated.
+State 1: <Initial predicate>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 2: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 3: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 4: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 5: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 6: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 7: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 8: <NsDie>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 9: <Restart>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 10: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 11: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 12: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 13: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 14: <MgrTake>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 15: <MgrRelease>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]

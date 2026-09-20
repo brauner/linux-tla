@@ -1,0 +1,49 @@
+Error: Invariant NoStarvationByDead is violated.
+State 1: <Initial predicate>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 2: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 3: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 4: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 5: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 6: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 7: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 8: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 9: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 10: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 11: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 12: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 13: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 14: <NsDie>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 15: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 16: <WRange>
+/\ hist = [starved |-> TRUE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]

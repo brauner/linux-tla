@@ -1,0 +1,44 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 2: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 3: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 4: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 5: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 6: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 7: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 8: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 9: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 10: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 11: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 12: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 1]
+State 13: <Restart>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 14: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 15: Stuttering

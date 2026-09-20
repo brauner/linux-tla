@@ -1,0 +1,74 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 2: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 3: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 4: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 5: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 6: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 7: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 8: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 9: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 10: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 11: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 12: <NsDie>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 13: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 14: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> FALSE]
+/\ budget = [restart |-> 0]
+State 15: <NsDie>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 16: <Create>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 17: <WLock>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 18: <WSlot>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 19: <WRange>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 20: <WPush>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 21: <Drop>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 22: <NsDie>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 23: <MgrTake>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 24: <MgrRelease>
+/\ hist = [starved |-> FALSE, dropped |-> TRUE]
+/\ budget = [restart |-> 0]
+State 25: Stuttering

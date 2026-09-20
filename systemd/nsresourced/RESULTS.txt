@@ -1,0 +1,8 @@
+config                       expected   result       states     time         check
+registry_fdstore_pins        violation  violation    25574      02s          ok
+registry_fixed               pass       pass         487886     22s          ok
+registry_fixed_3inodes       pass       pass         5164988    04min21s     ok
+registry_no_nsid             violation  violation    8893       01s          ok
+registry_no_reap             violation  violation    2592       00s          ok
+registry_no_ringbuf_lock     pass       pass         550526     24s          ok
+registry_ringbuf_drop        violation  violation    95418      03s          ok
