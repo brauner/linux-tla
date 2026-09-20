@@ -1,0 +1,17 @@
+Error: Invariant NoRefOnDropped is violated.
+<<"fails for", [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE], "shared", TRUE>>  FALSE
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ pc = "pick"
+/\ table = ( 0 :> [open |-> FALSE, file |-> FALSE, cloexec |-> FALSE] @@
+  1 :> [open |-> TRUE, file |-> TRUE, cloexec |-> FALSE] @@
+  2 :> [open |-> TRUE, file |-> TRUE, cloexec |-> FALSE] )
+/\ range = [null |-> TRUE, from |-> 0, to |-> 0]
+
+State 2: <Pick>
+/\ pc = "check"
+/\ table = ( 0 :> [open |-> FALSE, file |-> FALSE, cloexec |-> FALSE] @@
+  1 :> [open |-> TRUE, file |-> TRUE, cloexec |-> FALSE] @@
+  2 :> [open |-> TRUE, file |-> TRUE, cloexec |-> FALSE] )
+/\ range = [null |-> FALSE, from |-> 0, to |-> 1]
+

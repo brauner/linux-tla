@@ -1,0 +1,133 @@
+Error: Invariant NoRefOnDropped is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ clone = <<>>
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 0
+/\ refs = {}
+/\ pc = "size"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = <<>>
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 0
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+
+State 2: <Size>
+/\ clone = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> FALSE] )
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 0
+/\ refs = {}
+/\ pc = "copy"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = (0 :> FALSE)
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 3
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+
+State 3: <Copy>
+/\ clone = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> FALSE] )
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 1
+/\ refs = {}
+/\ pc = "copy"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = (0 :> FALSE)
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 3
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+
+State 4: <Copy>
+/\ clone = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> FALSE] )
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 2
+/\ refs = {}
+/\ pc = "copy"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = (0 :> FALSE)
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 3
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+
+State 5: <Copy>
+/\ clone = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 3
+/\ refs = {2}
+/\ pc = "copy"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = (0 :> FALSE)
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 3
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+
+State 6: <Copy>
+/\ clone = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 3
+/\ refs = {2}
+/\ pc = "finish"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = (0 :> FALSE)
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 3
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+
+State 7: <Finish>
+/\ clone = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] )
+/\ snap = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ i = 3
+/\ refs = {2}
+/\ pc = "done"
+/\ flags = [unshare |-> TRUE, cloexec |-> FALSE, except |-> FALSE, cloexec_only |-> FALSE]
+/\ full = (0 :> FALSE)
+/\ cap = 3
+/\ table = ( 0 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, open |-> FALSE, file |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, open |-> TRUE, file |-> TRUE] )
+/\ open_files = 3
+/\ range = [null |-> FALSE, from |-> 1, to |-> 3]
+

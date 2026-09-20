@@ -1,0 +1,35 @@
+Error: Invariant ClosedOnlySelected is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ max_fd = 0
+/\ cur = 0
+/\ ok = TRUE
+/\ pc = "start"
+/\ flags = [unshare |-> FALSE, cloexec |-> FALSE, except |-> TRUE, cloexec_only |-> FALSE]
+/\ table = ( 0 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, file |-> TRUE, open |-> TRUE] )
+/\ range = [from |-> 0, to |-> 2, null |-> FALSE]
+
+State 2: <Start>
+/\ max_fd = 2
+/\ cur = 0
+/\ ok = TRUE
+/\ pc = "scan"
+/\ flags = [unshare |-> FALSE, cloexec |-> FALSE, except |-> TRUE, cloexec_only |-> FALSE]
+/\ table = ( 0 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, file |-> TRUE, open |-> TRUE] )
+/\ range = [from |-> 0, to |-> 2, null |-> FALSE]
+
+State 3: <Scan>
+/\ max_fd = 2
+/\ cur = 3
+/\ ok = FALSE
+/\ pc = "closing"
+/\ flags = [unshare |-> FALSE, cloexec |-> FALSE, except |-> TRUE, cloexec_only |-> FALSE]
+/\ table = ( 0 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] @@
+  1 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] @@
+  2 :> [cloexec |-> FALSE, file |-> FALSE, open |-> FALSE] )
+/\ range = [from |-> 0, to |-> 2, null |-> FALSE]
+

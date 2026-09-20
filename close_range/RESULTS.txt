@@ -1,0 +1,11 @@
+config               expected   result       states     time         check
+dupfd_new            pass       pass         1071085    17s          ok
+dupfd_old            pass       pass         393408     09s          ok
+dupfd_old_refs       violation  violation    238925     01s          ok
+race_fixed           pass       running                 -            MISMATCH
+race_no_hop          violation  violation    95555      01s          ok
+refine_new           pass       pass         1734264    34s          ok
+refine_new_3w        pass       pass         1775556    45s          ok
+refine_new_w4        pass       pass         94131072   29min53s     ok
+refine_old           pass       pass         1734264    07s          ok
+refine_old_refs      violation  violation    47796      01s          ok
