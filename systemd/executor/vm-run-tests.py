@@ -17,6 +17,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--tree", default=os.path.expanduser("~/src/git/systemd-worktrees/work.systemd.keyring"))
 ap.add_argument("--tests-from", default=os.path.expanduser("~/src/git/systemd-worktrees/work.systemd.executor.races"))
 ap.add_argument("--cpus", default="4")
+ap.add_argument("--installed", action="store_true", help="run the scripts the image carries instead of passing them in")
 ap.add_argument("--out", default=str(here / "logs"))
 ap.add_argument("--timeout", type=int, default=900)
 ap.add_argument("scripts", nargs="+", help="script name, optionally =REGEX for TEST_MATCH_TESTCASE")
@@ -29,10 +30,14 @@ journal.unlink(missing_ok=True)
 units = pathlib.Path(args.tests_from) / "test/units"
 
 creds = []
-for name in ["test-control.sh", "util.sh", *(n for n, _ in scripts)]:
-    creds += ["--credential", f"test.{name}=" + shlex.quote((units / name).read_text())]
+if not args.installed:
+    for name in ["test-control.sh", "util.sh", *(n for n, _ in scripts)]:
+        creds += ["--credential", f"test.{name}=" + shlex.quote((units / name).read_text())]
 
-run = "; ".join(f'if TEST_MATCH_TESTCASE={shlex.quote(m)} "$D/{n}"; then echo "RESULT PASS {n}"; else echo "RESULT FAIL {n}"; fi'
+for n, m in scripts:
+    if any(c in m for c in '"$`\\\'') or "'" in n:
+        raise SystemExit(f"unsupported character in {n}={m}")
+run = "; ".join(f'if TEST_MATCH_TESTCASE="{m}" "$D/{n}"; then echo "RESULT PASS {n}"; else echo "RESULT FAIL {n}"; fi'
                 for n, m in scripts)
 unit = f"""[Unit]
 Description=run integration subtests

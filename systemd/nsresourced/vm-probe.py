@@ -17,7 +17,7 @@ ap.add_argument("--out", default=str(here / "logs"))
 ap.add_argument("--cmdline", default="")
 ap.add_argument("--timeout", type=int, default=480)
 args = ap.parse_args()
-out = pathlib.Path(args.out)
+out = pathlib.Path(args.out).resolve()
 out.mkdir(exist_ok=True)
 journal = out / "vm-probe.journal"
 journal.unlink(missing_ok=True)
