@@ -20,7 +20,7 @@ ap.add_argument("--cpus", default="4")
 ap.add_argument("--installed", action="store_true", help="run the scripts the image carries instead of passing them in")
 ap.add_argument("--out", default=str(here / "logs"))
 ap.add_argument("--timeout", type=int, default=900)
-ap.add_argument("scripts", nargs="+", help="script name, optionally =REGEX for TEST_MATCH_TESTCASE")
+ap.add_argument("scripts", nargs="+", help="script name, optionally =REGEX for TEST_MATCH_SUBTEST and TEST_MATCH_TESTCASE")
 args = ap.parse_args()
 scripts = [(a.split("=", 1) + [""])[:2] for a in args.scripts]
 out = pathlib.Path(args.out).resolve()
@@ -37,7 +37,7 @@ if not args.installed:
 for n, m in scripts:
     if any(c in m for c in '"$`\\\'') or "'" in n:
         raise SystemExit(f"unsupported character in {n}={m}")
-run = "; ".join(f'if TEST_MATCH_TESTCASE="{m}" "$D/{n}"; then echo "RESULT PASS {n}"; else echo "RESULT FAIL {n}"; fi'
+run = "; ".join(f'if TEST_MATCH_SUBTEST="{m}" TEST_MATCH_TESTCASE="{m}" "$D/{n}"; then echo "RESULT PASS {n}"; else echo "RESULT FAIL {n}"; fi'
                 for n, m in scripts)
 unit = f"""[Unit]
 Description=run integration subtests
