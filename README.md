@@ -26,4 +26,4 @@ and want a large machine (`run-parallel.sh`).
 
 ## License
 
-MIT, see `LICENSE`.
+MPL-2.0, see `LICENSE`.
