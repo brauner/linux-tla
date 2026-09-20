@@ -1,0 +1,7 @@
+config                       expected   result       states     time         check
+verity_3workers              pass       pass         13129      02s          ok
+verity_fixed                 pass       pass         319        00s          ok
+verity_no_cancel             pass       pass         293        00s          ok
+verity_no_restore            violation  violation    257        00s          ok
+verity_no_udev_sync          violation  violation    1617       01s          ok
+verity_worker_dies           violation  violation    417        00s          ok

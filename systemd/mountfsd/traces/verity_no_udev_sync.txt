@@ -1,0 +1,54 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ pc = [w1 |-> "idle", w2 |-> "idle"]
+State 2: <Start>
+/\ pc = [w1 |-> "idle", w2 |-> "loop"]
+State 3: <Start>
+/\ pc = [w1 |-> "loop", w2 |-> "loop"]
+State 4: <Loop>
+/\ pc = [w1 |-> "activate", w2 |-> "loop"]
+State 5: <Activate>
+/\ pc = [w1 |-> "try_open", w2 |-> "loop"]
+State 6: <TryOpen>
+/\ pc = [w1 |-> "again", w2 |-> "loop"]
+State 7: <Again>
+/\ pc = [w1 |-> "loop", w2 |-> "loop"]
+State 8: <Udev>
+/\ pc = [w1 |-> "loop", w2 |-> "loop"]
+State 9: <Loop>
+/\ pc = [w1 |-> "check", w2 |-> "loop"]
+State 10: <Check>
+/\ pc = [w1 |-> "reuse", w2 |-> "loop"]
+State 11: <Reuse>
+/\ pc = [w1 |-> "opened", w2 |-> "loop"]
+State 12: <Opened>
+/\ pc = [w1 |-> "done", w2 |-> "loop"]
+State 13: <Umount>
+/\ pc = [w1 |-> "done", w2 |-> "loop"]
+State 14: <Loop>
+/\ pc = [w1 |-> "done", w2 |-> "activate"]
+State 15: <Activate>
+/\ pc = [w1 |-> "done", w2 |-> "check"]
+State 16: <RemoveWork>
+/\ pc = [w1 |-> "done", w2 |-> "check"]
+State 17: <Udev>
+/\ pc = [w1 |-> "done", w2 |-> "check"]
+State 18: <Check>
+/\ pc = [w1 |-> "done", w2 |-> "again"]
+State 19: <Again>
+/\ pc = [w1 |-> "done", w2 |-> "loop"]
+State 20: <Loop>
+/\ pc = [w1 |-> "done", w2 |-> "activate"]
+State 21: <Activate>
+/\ pc = [w1 |-> "done", w2 |-> "try_open"]
+State 22: <TryOpen>
+/\ pc = [w1 |-> "done", w2 |-> "again"]
+State 23: <Again>
+/\ pc = [w1 |-> "done", w2 |-> "loop"]
+State 24: <Loop>
+/\ pc = [w1 |-> "done", w2 |-> "fallback"]
+State 25: <Fallback>
+/\ pc = [w1 |-> "done", w2 |-> "done_unique"]
+State 26: <Udev>
+/\ pc = [w1 |-> "done", w2 |-> "done_unique"]
+State 27: Stuttering

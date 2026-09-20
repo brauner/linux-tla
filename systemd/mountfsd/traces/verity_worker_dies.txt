@@ -1,0 +1,16 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ pc = [w1 |-> "idle", w2 |-> "idle"]
+State 2: <Start>
+/\ pc = [w1 |-> "idle", w2 |-> "loop"]
+State 3: <Loop>
+/\ pc = [w1 |-> "idle", w2 |-> "activate"]
+State 4: <Activate>
+/\ pc = [w1 |-> "idle", w2 |-> "try_open"]
+State 5: <Die>
+/\ pc = [w1 |-> "idle", w2 |-> "dead"]
+State 6: <Start>
+/\ pc = [w1 |-> "loop", w2 |-> "dead"]
+State 7: <Die>
+/\ pc = [w1 |-> "dead", w2 |-> "dead"]
+State 8: Stuttering

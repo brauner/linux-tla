@@ -1,0 +1,30 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ pc = [w1 |-> "idle", w2 |-> "idle"]
+State 2: <Start>
+/\ pc = [w1 |-> "loop", w2 |-> "idle"]
+State 3: <Loop>
+/\ pc = [w1 |-> "activate", w2 |-> "idle"]
+State 4: <Start>
+/\ pc = [w1 |-> "activate", w2 |-> "loop"]
+State 5: <Loop>
+/\ pc = [w1 |-> "activate", w2 |-> "activate"]
+State 6: <Activate>
+/\ pc = [w1 |-> "activate", w2 |-> "try_open"]
+State 7: <TryOpen>
+/\ pc = [w1 |-> "activate", w2 |-> "opened"]
+State 8: <Activate>
+/\ pc = [w1 |-> "check", w2 |-> "opened"]
+State 9: <Opened>
+/\ pc = [w1 |-> "check", w2 |-> "done"]
+State 10: <Check>
+/\ pc = [w1 |-> "reuse", w2 |-> "done"]
+State 11: <Umount>
+/\ pc = [w1 |-> "reuse", w2 |-> "done"]
+State 12: <Reuse>
+/\ pc = [w1 |-> "waitlink", w2 |-> "done"]
+State 13: <WaitLink>
+/\ pc = [w1 |-> "fallback", w2 |-> "done"]
+State 14: <Fallback>
+/\ pc = [w1 |-> "done_unique", w2 |-> "done"]
+State 15: Stuttering
