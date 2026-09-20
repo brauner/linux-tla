@@ -1,0 +1,13 @@
+config                     expected   result       states     time         check
+cdhole_no_gate             violation  violation    124556     02s          ok
+plain_no_exec_cancel       violation  violation    86021532   04min36s     ok
+plain_strict               violation  violation    767424     05s          ok
+signals_no_freezer         violation  violation    499037     03s          ok
+signals_no_rcu             violation  violation    10096874   39s          ok
+signals_no_retarget        violation  violation    2717607    11s          ok
+signals_retarget_only      pass       pass         31011083   01min52s     ok
+signals_sigpending_only    pass       pass         33225155   01min58s     ok
+sqpoll_deadlock            violation  violation    1361804    01min08s     ok
+sqpoll_fixed               pass       pass         3105865    05min30s     ok
+sqpoll_mask_only           pass       pass         3105865    03min30s     ok
+sqpoll_no_gate_signaled    violation  violation    30449      02s          ok
