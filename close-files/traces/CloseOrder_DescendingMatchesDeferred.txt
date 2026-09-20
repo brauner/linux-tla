@@ -1,0 +1,36 @@
+Error: Invariant DescendingMatchesDeferred is violated.
+State 1: <Initial predicate>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 1]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {}]
+State 2: <Step>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 2]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {}]
+State 3: <Step>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 3]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {3}]
+State 4: <Step>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 4]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {3}]
+State 5: <Step>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 5]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {2, 3}]
+State 6: <Step>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 6]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {2, 3}]
+State 7: <Step>
+/\ pos = [deferred |-> 1, ascending |-> 1, descending |-> 7]
+/\ relWaits = <<{}, {}, {}>>
+/\ flushWaits = <<{2}, {}, {}>>
+/\ released = [deferred |-> {}, ascending |-> {}, descending |-> {1, 2, 3}]

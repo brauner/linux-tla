@@ -1,0 +1,6 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ child = "start"
+/\ parent = "waiting"
+/\ route = "exec"
+State 2: Stuttering

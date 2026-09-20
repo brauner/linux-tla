@@ -1,0 +1,19 @@
+Error: Invariant JobHungUp is violated.
+State 1: <Initial predicate>
+/\ pgrp = TRUE
+/\ sessionTty = TRUE
+/\ leader = "exit"
+/\ count = 1
+/\ jobSighup = FALSE
+State 2: <Step1>
+/\ pgrp = TRUE
+/\ sessionTty = FALSE
+/\ leader = "step2"
+/\ count = 0
+/\ jobSighup = FALSE
+State 3: <Step2>
+/\ pgrp = TRUE
+/\ sessionTty = FALSE
+/\ leader = "done"
+/\ count = 0
+/\ jobSighup = FALSE

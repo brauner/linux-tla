@@ -1,0 +1,22 @@
+Error: Temporal properties were violated.
+State 1: <Initial predicate>
+/\ forker = "fork"
+/\ work = "idle"
+/\ readers = 0
+/\ writer = FALSE
+State 2: <ForkTakesRead>
+/\ forker = "fail"
+/\ work = "idle"
+/\ readers = 1
+/\ writer = FALSE
+State 3: <ForkFails>
+/\ forker = "release"
+/\ work = "idle"
+/\ readers = 1
+/\ writer = FALSE
+State 4: <ForkReleases>
+/\ forker = "wait"
+/\ work = "queued"
+/\ readers = 1
+/\ writer = FALSE
+State 5: Stuttering
