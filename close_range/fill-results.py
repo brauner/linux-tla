@@ -11,6 +11,7 @@ desc = {
  "refine_old": "the code before the series with its two flags: Refines, CloneOK",
  "refine_old_refs": "the code before the series: NoRefOnDropped (the clone references what it then closes again)",
  "race_fixed": "__range_close() against open, fd_install, close, F_SETFD and table growth: ClosedOnlySelected, Bounded, Terminates",
+ "race_fixed_w2": "the same walk with two-bit words, the size that finishes in minutes",
  "race_no_hop": "the hop of next_fd_to_close() taken out: ClosedOnlySelected (the walk closes the kept window)",
  "dupfd_new": "dup_fd() against the lockless fd_install() and the unlocked resize: CloneOK, NoRefOnDropped, KeptCopied, DroppedNotInClone, CopiedAreFiles, Finishes",
  "dupfd_old": "the code before the series: the same without NoRefOnDropped",

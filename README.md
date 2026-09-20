@@ -10,7 +10,7 @@ against.
 | Directory | Protocol | Kernel base |
 |-----------|----------|-------------|
 | `coredump/` | the coredump rendezvous and the signal, exit, fork, exec and io-wq code around it; "coredump & signals: an impossible affair" | 938c2dd45269 on c7b1fa3db4a1 (vfs-7.4.coredump) |
-| `close_range/` | close_range() with CLOSE_RANGE_EXCEPT and CLOSE_RANGE_CLOEXEC_ONLY and the clone dup_fd() makes for CLOSE_RANGE_UNSHARE; "files,close_range: add CLOSE_RANGE_{CLOEXEC_ONLY,EXCEPT}" | 93957f154604 on 5dd1818b15d9 (work.file.close_range_except) |
+| `close_range/` | close_range() with CLOSE_RANGE_EXCEPT and CLOSE_RANGE_CLOEXEC_ONLY and the clone dup_fd() makes for CLOSE_RANGE_UNSHARE; "files,close_range: add CLOSE_RANGE_{CLOEXEC_ONLY,EXCEPT}" | e0bfe9dbba49 on 5dd1818b15d9 (work.file.close_range_except) |
 | `close-files/` | the order in which a dying descriptor table closes its files and the exit, exec and fork code around it; "files: make closing files synchronous for close_range(), exec, exit" and its fixes | c7b1fa3db4a1 plus the fixes in 938c2dd45269 |
 
 ## Running

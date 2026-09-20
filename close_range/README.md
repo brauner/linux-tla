@@ -1,6 +1,6 @@
 # TLA+ model of close_range() and the clone dup_fd() makes for it
 
-Tree: `work.file.close_range_except` at 93957f154604 on top of
+Tree: `work.file.close_range_except` at e0bfe9dbba49 on top of
 5dd1818b15d9, the series "files,close_range: add
 CLOSE_RANGE_{CLOEXEC_ONLY,EXCEPT}".
 
@@ -36,9 +36,11 @@ version 2.19 was used).  Java 17 or newer.
     ./check.sh refine_new 16          # one configuration
     ./check-all.sh                    # every configuration, summary in logs/summary.txt
 
-Everything but `race_fixed` finishes in under a minute on a laptop.
-`race_fixed` explores the interleavings of the walk with liveness and
-wants a big machine (`run-parallel.sh`, `TLC_WORKERS`, `TLC_HEAP`).
+Everything but `race_fixed` and `refine_new_w4` finishes in minutes on a
+laptop.  `race_fixed` explores the interleavings of the walk with liveness
+over three-bit words and wants a big machine (`run-parallel.sh`,
+`TLC_WORKERS`, `TLC_HEAP`); `race_fixed_w2` is the same walk over two-bit
+words.
 
 ## What is in the model
 
@@ -133,6 +135,7 @@ models start from every one-word table and let the table grow.
 | `dupfd_new` | dup_fd() against the lockless fd_install() and the unlocked resize: CloneOK, NoRefOnDropped, KeptCopied, DroppedNotInClone, CopiedAreFiles, Finishes | pass | pass | 1071085 | 17s |
 | `dupfd_old` | the code before the series: the same without NoRefOnDropped | pass | pass | 393408 | 09s |
 | `dupfd_old_refs` | the code before the series: NoRefOnDropped | violation | violation | 238925 | 01s |
+| `race_fixed_w2` | the same walk with two-bit words, the size that finishes in minutes | pass | pass | 1495584 | 27s |
 | `race_no_hop` | the hop of next_fd_to_close() taken out: ClosedOnlySelected (the walk closes the kept window) | violation | violation | 95555 | 01s |
 | `refine_new` | the series, all twelve flag combinations, every table of one or two words of three bits: Refines, CloneOK, NoRefOnDropped, Sized | pass | pass | 1734264 | 34s |
 | `refine_new_3w` | the same over three words of two bits | pass | pass | 1775556 | 45s |
