@@ -23,3 +23,7 @@ or newer runtime.
 The configurations that switch a fix off stop at their counterexample in
 seconds to minutes; the green proofs explore tens of millions of states
 and want a large machine (`run-parallel.sh`).
+
+## License
+
+MIT, see `LICENSE`.
