@@ -1,7 +1,11 @@
 config                     expected   result       states     time         check
+cdhole_fixed               pass       pass         13610181   22min57s     ok
 cdhole_no_gate             violation  violation    124556     02s          ok
+plain_fixed                pass       pass         344057583  19min06s     ok
+plain_live                 pass       pass         25767521   50min21s     ok
 plain_no_exec_cancel       violation  violation    86021532   04min36s     ok
-plain_strict               violation  violation    767424     05s          ok
+plain_strict               violation  violation    787886     03s          ok
+signals_fixed              pass       pass         30849827   34min10s     ok
 signals_no_freezer         violation  violation    499037     03s          ok
 signals_no_rcu             violation  violation    10096874   39s          ok
 signals_no_retarget        violation  violation    2717607    11s          ok

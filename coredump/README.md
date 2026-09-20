@@ -162,7 +162,32 @@ forced to act, so every property also holds when it stays quiet.
 
 ## Results
 
-RESULTS_TABLE
+| Configuration | Checks | Expected | Result | Distinct states | TLC time (32 workers) |
+|---|---|---|---|---|---|
+| `cdhole_fixed` | every fix on, all properties | pass | pass | 13610181 | 22min57s |
+| `cdhole_no_gate` | FIX_GATE_POSTCOREDUMP off: CountConsistent (the exit(2) thread creates an uncounted worker) | violation | violation | 124556 | 02s |
+| `plain_fixed` | every fix on, all invariants (full budgets) | pass | pass | 344057583 | 19min06s |
+| `plain_live` | every fix on, all invariants and both liveness properties (no USR signal, no retry) | pass | pass | 25767521 | 50min21s |
+| `plain_no_exec_cancel` | FIX_EXEC_CANCEL_FIRST off: SingleThreadedExec (a create_worker_cont() survives de_thread()) | violation | violation | 86021532 | 04min36s |
+| `plain_strict` | every fix on: TruncationJustifiedStrict (TIF_NOTIFY_SIGNAL from a worker creation cuts the dump) | violation | violation | 787886 | 03s |
+| `signals_fixed` | every fix on, all properties | pass | pass | 30849827 | 34min10s |
+| `signals_no_freezer` | FIX_SIGPENDING_DUMPCORE off: FreezeAbortsDump (a cgroup v2 freeze lets a file dump complete) | violation | violation | 499037 | 03s |
+| `signals_no_rcu` | FIX_RCU_RELEASE off: NoUseAfterFree | violation | violation | 10096874 | 39s |
+| `signals_no_retarget` | FIX_RETARGET_GROUP_EXIT and FIX_SIGPENDING_DUMPCORE off: TruncationJustified | violation | violation | 2717607 | 11s |
+| `signals_retarget_only` | only FIX_RETARGET_GROUP_EXIT off: TruncationJustified (the signal_pending() rule covers the retarget) | pass | pass | 31011083 | 01min52s |
+| `signals_sigpending_only` | only FIX_SIGPENDING_DUMPCORE off: TruncationJustified (nothing but the retarget sets TIF_SIGPENDING on the dumper) | pass | pass | 33225155 | 01min58s |
+| `sqpoll_deadlock` | FIX_WORKER_NODUMP and FIX_PTRACE_MASK off: DumpEnds (the io-wq worker of an SQPOLL ring dumps, the SQPOLL thread waits for it) | violation | violation | 1361804 | 01min08s |
+| `sqpoll_fixed` | every fix on, all properties | pass | pass | 3105865 | 05min30s |
+| `sqpoll_mask_only` | only FIX_WORKER_NODUMP off: DumpEnds (the mask keeps the worker from ever dequeuing the signal) | pass | pass | 3105865 | 03min30s |
+| `sqpoll_no_gate_signaled` | FIX_GATE_SIGNALED off: CountConsistent (the SQPOLL thread creates an uncounted worker from its cancel loop) | violation | violation | 30449 | 02s |
+
+`IoWqExitBit_fixed` passes and `IoWqExitBit_nobarrier` violates
+`NoStrandedCreate` with the store buffering trace (set_bit() buffered,
+the cancel loads an empty list, the creator sees the bit clear before and
+after its add, the store lands).  `CorePattern_fixed` passes and
+`CorePattern_torn` violates `ConsistentParse` with the file mode of the
+new pattern combined with the helper path of the old one.
+
 
 ## What the model says beyond the series
 
