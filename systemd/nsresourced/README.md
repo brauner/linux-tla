@@ -160,7 +160,9 @@ happen, the ring buffer drops what does not fit.
   service runs (`registry_fdstore_pins`).  Every reclamation path in the
   code presumes that the namespace can die.  The pushes, the restore at
   startup and the store limit are dead code to remove, not a fork flag to
-  add.
+  add; the systemd branch `work.systemd.nsresourced.fdstore` removes them
+  and adds a TEST-13-NSPAWN case that a managed container's namespace is
+  released with the container.
 - **The id in the registry is what makes inode reuse safe**
   (`registry_no_nsid`): a death event that arrives after the kernel
   handed the inode number to a new registered namespace would release
@@ -169,7 +171,10 @@ happen, the ring buffer drops what does not fit.
 - **A dropped death event is only recovered by an allocation that runs
   out of ranges, or a restart** (`registry_ringbuf_drop`,
   `registry_no_reap`): the ring buffer has room for 1024 inodes, and the
-  reap-on-allocation logic only runs for a range a request wants.
+  reap-on-allocation logic only runs for a range a request wants.  Noted
+  in systemd's TODO.md on the same branch, with the two ways out: count
+  the events the kprobe could not deliver and sweep when the count moved,
+  or sweep the registry periodically.
 - The manager's lock in `ringbuf_event()` protects the multi-file
   registry writes, which the model does not split; with atomic entries
   nothing depends on it (`registry_no_ringbuf_lock`).

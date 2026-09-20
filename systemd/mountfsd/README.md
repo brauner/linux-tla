@@ -130,7 +130,9 @@ udev.  A client's unmount and a worker's death are the environment's.
   so the model finds no orphan with the cookie (`verity_fixed`,
   `verity_3workers`).  Without the cookie, or with more concurrent
   removals than attempts, the device stays behind until the next mount
-  of the same image reuses it.
+  of the same image reuses it.  The systemd branch
+  `work.systemd.mountfsd.deferred` sets `restore_deferred_remove` after a
+  successful activation as well.
 - A worker killed after `dm_deferred_remove_cancel()` leaves the device
   without deferred removal as well (`verity_worker_dies`); the cleanup
   is a `_cleanup_` variable and does not run on SIGKILL.
