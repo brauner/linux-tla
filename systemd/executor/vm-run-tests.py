@@ -17,6 +17,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--tree", default=os.path.expanduser("~/src/git/systemd-worktrees/work.systemd.keyring"))
 ap.add_argument("--tests-from", default=os.path.expanduser("~/src/git/systemd-worktrees/work.systemd.executor.races"))
 ap.add_argument("--cpus", default="4")
+ap.add_argument("--machine", default="runtests", help="VM name, distinct per concurrent run")
 ap.add_argument("--installed", action="store_true", help="run the scripts the image carries instead of passing them in")
 ap.add_argument("--out", default=str(here / "logs"))
 ap.add_argument("--timeout", type=int, default=900)
@@ -54,7 +55,7 @@ StandardOutput=journal+console
 StandardError=journal+console
 ExecStart=/bin/bash -c 'D=/usr/lib/systemd/tests/testdata/units; mkdir -p "$D"; for f in "$CREDENTIALS_DIRECTORY"/test.*; do n=$${{f##*/test.}}; cp "$f" "$D/$n"; chmod +x "$D/$n"; done; {run}; exit 0'
 """
-cmd = ["mkosi", "--directory", args.tree, "--machine", "runtests", "--ephemeral=yes",
+cmd = ["mkosi", "--directory", args.tree, "--machine", args.machine, "--ephemeral=yes",
        "--runtime-network=none", "--runtime-build-sources=no", "--tools-tree=no", "--tpm=no",
        "--register=no", "--console=read-only", "--forward-journal", str(journal), "--cpus", args.cpus,
        "--credential", "systemd.extra-unit.runtests.service=" + shlex.quote(unit), *creds,
