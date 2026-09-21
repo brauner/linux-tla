@@ -1,0 +1,143 @@
+Error: Invariant NoLostCancel is violated.
+--- state 1: Initial
+    loop: phase=idle exiting=False exitReq=False finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=True/0 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber pending res=0 cb=none waiters=[] held=True
+--- state 2: Dispatch
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=1 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=False/1 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber pending res=0 cb=none waiters=[] held=True
+--- state 3: OpTimeoutBegin
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=1 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=False/1 exit=True float=False by=main prio=0 bud=3 stack=['x1'] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 4: OpSpawn
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=1 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=False/1 exit=True float=False by=main prio=0 bud=2 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: initial   defer=True/1 exit=True float=False by=f1 prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber pending res=0 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 5: OpYield
+    loop: phase=idle exiting=False exitReq=False finished=False iter=1 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=True/1 exit=True float=False by=main prio=0 bud=1 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: initial   defer=True/1 exit=True float=False by=f1 prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber pending res=0 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 6: MainCancel
+    loop: phase=idle exiting=False exitReq=False finished=False iter=1 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=True/1 exit=True float=False by=main prio=0 bud=1 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: initial   defer=True/1 exit=True float=False by=f1 prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 7: Dispatch
+    loop: phase=f3 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=True/1 exit=True float=False by=main prio=0 bud=1 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: initial   defer=False/2 exit=True float=False by=f1 prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 8: OpYield
+    loop: phase=idle exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=True/1 exit=True float=False by=main prio=0 bud=1 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: ready     defer=True/2 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 9: Dispatch
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=False/2 exit=True float=False by=main prio=0 bud=1 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: ready     defer=True/1 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 10: ContinueOp
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=False/2 exit=True float=False by=main prio=0 bud=1 stack=['x1', 'f3'] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: ready     defer=True/1 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 11: OpTimeoutEnd
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=False/2 exit=True float=False by=main prio=0 bud=0 stack=['x1', 'f3'] mode=unwind->0/block rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: ready     defer=True/1 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=[] held=True
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 12: Unwind
+    loop: phase=idle exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: suspended defer=False/2 exit=True float=False by=main prio=0 bud=0 stack=['x1', 'f3'] mode=unwind->0/block rv=0 cont=cwu:none fut=none tgt=f3 w=w1 wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: cancelled defer=True/1 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=['w1'] held=True
+    fut w1: wait pending res=0 cb=f1 waiters=[] held=True tgt=f3
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 13: Dispatch
+    loop: phase=f3 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: suspended defer=False/1 exit=True float=False by=main prio=0 bud=0 stack=['x1', 'f3'] mode=unwind->0/block rv=0 cont=cwu:none fut=none tgt=f3 w=w1 wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: cancelled defer=False/2 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=0 cont=op:yield fut=none tgt=none w=none wake=-1/cancel pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=['w1'] held=True
+    fut w1: wait pending res=0 cb=f1 waiters=[] held=True tgt=f3
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 14: ContinueOp
+    loop: phase=f3 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: suspended defer=False/1 exit=True float=False by=main prio=0 bud=0 stack=['x1', 'f3'] mode=unwind->0/block rv=0 cont=cwu:none fut=none tgt=f3 w=w1 wake=0/none pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: cancelled defer=False/2 exit=True float=False by=f1 prio=0 bud=3 stack=[] mode=unwind->0/return rv=-1 cont=none:none fut=none tgt=none w=none wake=-1/cancel pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber pending res=0 cb=none waiters=['w1'] held=True
+    fut w1: wait pending res=0 cb=f1 waiters=[] held=True tgt=f3
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 15: Unwind
+    loop: phase=idle exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=True/1 exit=True float=False by=main prio=0 bud=0 stack=['x1', 'f3'] mode=unwind->0/block rv=0 cont=cwu:none fut=none tgt=f3 w=w1 wake=0/w1 pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: completed defer=False/2 exit=False float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=-1 cont=none:none fut=none tgt=none w=none wake=-1/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut w1: wait resolved res=-1 cb=f1 waiters=[] held=True tgt=f3
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 16: Dispatch
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=2 crash='' spurious=False badYield=False lostCancel=False
+    f1: ready     defer=False/2 exit=True float=False by=main prio=0 bud=0 stack=['x1', 'f3'] mode=unwind->0/block rv=0 cont=cwu:none fut=none tgt=f3 w=w1 wake=-1/w1 pend=0 sw=0
+    f2: completed defer=False/0 exit=False float=False by=main prio=0 bud=4 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f3: completed defer=False/1 exit=False float=False by=f1 prio=0 bud=3 stack=[] mode=normal->0/return rv=-1 cont=none:none fut=none tgt=none w=none wake=-1/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=True
+    fut f2: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut f3: fiber resolved res=-1 cb=none waiters=[] held=True
+    fut w1: wait resolved res=-1 cb=f1 waiters=[] held=True tgt=f3
+    fut x1: deadline pending res=0 cb=f1 waiters=[] held=True src=True fired=False obs=-1 prio=0 dropped=False
+--- state 17: ContinueCwu

@@ -1,0 +1,32 @@
+Error: Invariant NoCrash is violated.
+--- state 1: Initial
+    loop: phase=idle exiting=False exitReq=False finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=True/0 exit=True float=True by=main prio=0 bud=2 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=False
+--- state 2: Dispatch
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=False/0 exit=True float=True by=main prio=0 bud=2 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=False
+--- state 3: OpSpawn
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=False/0 exit=True float=True by=main prio=0 bud=1 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=True by=f1 prio=0 bud=2 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=False
+    fut f2: fiber pending res=0 cb=f1 waiters=[] held=False
+--- state 4: OpReturn
+    loop: phase=f1 exiting=False exitReq=False finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: initial   defer=False/0 exit=True float=True by=main prio=0 bud=1 stack=[] mode=unwind->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=True by=f1 prio=0 bud=2 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f1: fiber pending res=0 cb=none waiters=[] held=False
+    fut f2: fiber pending res=0 cb=f1 waiters=[] held=False
+--- state 5: Unwind
+    loop: phase=idle exiting=False exitReq=False finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: freed     defer=False/0 exit=False float=False by=main prio=0 bud=1 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=True by=f1 prio=0 bud=2 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f2: fiber pending res=0 cb=f1 waiters=[] held=False
+--- state 6: MainExit
+    loop: phase=idle exiting=False exitReq=True finished=False iter=0 crash='' spurious=False badYield=False lostCancel=False
+    f1: freed     defer=False/0 exit=False float=False by=main prio=0 bud=1 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    f2: initial   defer=True/0 exit=True float=True by=f1 prio=0 bud=2 stack=[] mode=normal->0/return rv=0 cont=none:none fut=none tgt=none w=none wake=0/none pend=0 sw=0
+    fut f2: fiber pending res=0 cb=f1 waiters=[] held=False
+--- state 7: Dispatch
