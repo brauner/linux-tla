@@ -20,6 +20,7 @@ LAYOUTS = {
     "chain":   (10, 3, 3, 1),
     "peers":   (8, 3, 3, 1),
     "locked":  (9, 3, 3, 1),
+    "parentcand": (6, 2, 1, 1),   # scripted: the victim's parent is a candidate
 }
 
 # name: (layout, fixes off, invariants, expectation, overrides)
@@ -47,6 +48,11 @@ CONFIGS["locked_set_group_unbindable"] = ("locked", ["FIX_SET_GROUP_UNBINDABLE"]
 # F5: propagate_mount_busy() skips a copy with several children, but
 # propagate_umount() pulls it out when they are victims plus one overmount
 CONFIGS["locked_busy_victims"] = ("locked", ["FIX_BUSY_VICTIMS"], ["SyncUmountNotBusy"], "violation", {})
+# the review's case: the victim's parent sits at the victim's mountpoint under
+# a receiver and is a candidate itself; the victim is still its child when
+# propagate_mount_busy() runs
+CONFIGS["parentcand_fixed"] = ("parentcand", [], SAFETY, "pass", {})
+CONFIGS["parentcand_busy_victims"] = ("parentcand", ["FIX_BUSY_VICTIMS"], ["SyncUmountNotBusy"], "violation", {})
 CONFIGS["small_smoke"] = ("small", [], SAFETY + ["ReachOK"], "pass", {"ops": 3})
 for lay in ["chain", "peers", "locked"]:
     CONFIGS[lay + "_fixed"] = (lay, [], SAFETY, "pass", {})

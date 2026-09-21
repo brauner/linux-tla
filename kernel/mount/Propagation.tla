@@ -551,18 +551,21 @@ BusyExact(mt, refs, m) ==
 \* the next one below it.  A candidate goes when all of its children are
 \* the next candidate or its overmount (trim_one()), unless the next
 \* candidate is not its overmount and some candidate further down has a
-\* child outside the chain (trim_ancestors()).
+\* child outside the chain (trim_ancestors()).  The victim m itself does
+\* not count as a child: umount_tree() hides it from its parent before
+\* propagate_umount() runs, and the parent is a candidate when it sits at
+\* m's mountpoint under a receiver.
 Receivers(mt, m) == ToSet(PropagationOrder(mt, mt[m].parent))
 NextCandidate(mt, R, c, d) == IF c \in R THEN LookupMnt(mt, c, d) ELSE NoMnt
-RECURSIVE FoundBelow(_, _, _, _)
-FoundBelow(mt, R, c, d) ==
+RECURSIVE FoundBelow(_, _, _, _, _)
+FoundBelow(mt, R, c, d, m) ==
     LET nxt == NextCandidate(mt, R, c, d)
-    IN \/ \E n \in ToSet(mt[c].children) : n # nxt
-       \/ (nxt # NoMnt /\ FoundBelow(mt, R, nxt, d))
-PulledOut(mt, R, c, d) ==
+    IN \/ \E n \in ToSet(mt[c].children) : n # nxt /\ n # m
+       \/ (nxt # NoMnt /\ FoundBelow(mt, R, nxt, d, m))
+PulledOut(mt, R, c, d, m) ==
     LET nxt == NextCandidate(mt, R, c, d)
-    IN /\ \A n \in ToSet(mt[c].children) : n = nxt \/ n = mt[c].over
-       /\ ~(nxt # NoMnt /\ nxt # mt[c].over /\ FoundBelow(mt, R, nxt, d))
+    IN /\ \A n \in ToSet(mt[c].children) : n = nxt \/ n = mt[c].over \/ n = m
+       /\ ~(nxt # NoMnt /\ nxt # mt[c].over /\ FoundBelow(mt, R, nxt, d, m))
 BusyMirror(mt, refs, m) ==
     \/ mt[m].children # <<>>
     \/ refs[m] > 0
@@ -570,7 +573,7 @@ BusyMirror(mt, refs, m) ==
        /\ LET R == Receivers(mt, m)
               d == mt[m].mp
           IN \E q \in R : LET c == LookupMnt(mt, q, d)
-                          IN c # NoMnt /\ PulledOut(mt, R, c, d) /\ refs[c] > 0
+                          IN c # NoMnt /\ PulledOut(mt, R, c, d, m) /\ refs[c] > 0
 
 PropagateMountBusy(mt, refs, m, own) ==
     IF FIX_BUSY_VICTIMS THEN BusyMirror(mt, refs, m)

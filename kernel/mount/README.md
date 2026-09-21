@@ -32,6 +32,7 @@ Two families of models, as in `~/notes/work.tla.mount/PLAN.md`:
 | `*.cfg` | TLC configurations from `gen-cfgs.py`; the header says what to expect |
 | `check.sh`, `check-all.sh`, `run-parallel.sh`, `summarize.sh` | run one, all, or all at once |
 | `show-trace.py` | print a counterexample from a log compactly |
+| `MC_parentcand.tla` | a scripted layout: the victim's parent is a candidate itself (from the review of the F5 fix) |
 | `MC_dbg.tla`, `dbg_trace.cfg` | a debugging template: script a scenario as a prelude with `MaxOps = 0`; the `PreludeDone` invariant fails after the last step and TLC prints every state |
 | `MntPut.tla`, `MC_mntput.tla` | Family B: __legitimize_mnt(), mntput_no_expire() with its slow path, cleanup_mnt(), do_umount() (sync and MNT_DETACH), namespace_unlock(), mntget()/mntput() pairs of a task holding a reference, migration; per-CPU mnt_count summed CPU by CPU, TSO store buffers, RCU grace periods |
 | `show-put-trace.py` | print a MntPut counterexample compactly |
@@ -121,7 +122,7 @@ occur.
 | `FIX_TUCK_LOCK` | a mount slid under a locked one does not take over MNT_LOCKED (c62a4766937e) |
 | `FIX_PUT_MNT_NS_DISCONNECT` | put_mnt_ns() keeps the tree connected (0342482a4d15) |
 | `FIX_CLONE_UNBINDABLE` | clone_mnt() drops T_UNBINDABLE, as it does upstream since 406fea799925 (finding F1); the green configurations run with the fix, `small_clone_unbindable` shows the bug |
-| `FIX_BUSY_VICTIMS` | propagate_mount_busy() only checks the references of copies without children and of copies covered by a single overmount, as upstream does (finding F5): since the 2025 propagate_umount() a copy whose children are victims themselves plus one overmount is pulled out too, so a synchronous umount succeeds with that copy still in use; the green configurations check every mount the umount would pull out, `locked_busy_victims` shows the bug |
+| `FIX_BUSY_VICTIMS` | propagate_mount_busy() only checks the references of copies without children and of copies covered by a single overmount, as upstream does (finding F5): since 99b19d16471e (v4.13) propagation also pulls out a copy whose children are victims themselves plus one overmount, and the victim's own parent when it sits at the victim's mountpoint under a receiver, so a synchronous umount succeeds with that copy still in use; the green configurations run the fix's rule (`BusyMirror`) and `BusyMirrorOK` checks it against the exact victim set, `locked_busy_victims` shows the bug |
 | `FIX_SET_GROUP_UNBINDABLE` | do_set_group() accepts an unbindable target, as upstream does since 9ffb14ef61ba (finding F4): with a slave source the target ends up unbindable and a slave at once; the green configurations run with the fix, `locked_set_group_unbindable` shows the bug |
 
 `MntPut.tla` (all constants are the pieces of the protocol, switched off one
@@ -355,6 +356,7 @@ Every fix on, every safety invariant including `BusyMirrorOK`:
 | `locked_fixed` (MaxOps 3) | pass | 191,799 |
 | `chain_fixed` (MaxOps 3) | pass | 359,356 |
 | `small_smoke` (MaxOps 3, plus `ReachOK`) | pass | 98,492 |
+| `parentcand_fixed` (scripted, MaxOps 1) | pass | 53 |
 | `algebra_smoke` (MaxOps 3) | running | |
 | `small_fixed`, `algebra_fixed`, `algebra_*` mutations (MaxOps 4) | not feasible: the algebra layout sat at BFS depth 5 for 13 hours at ~6k states/min | |
 
@@ -373,7 +375,7 @@ One fix off at a time:
 | `locked_tuck_no_lock` | `CoverOK` violated | a tuck under a locked mount without the lock transfer of c62a4766937e uncovers it; `chain_tuck_no_lock`, `small_tuck_no_lock` pass (no locked mount to uncover, 361k and 3.2M states) |
 | `small_clone_unbindable` | `AlgebraOK` violated | **F1**: clone_mnt() drops T_UNBINDABLE, the copied namespace can bind what the original could not (fixed on `work.mount.unbindable_clone`) |
 | `locked_set_group_unbindable` | `Structure` violated | **F4**: do_set_group() takes an unbindable target; with a slave source the target ends up unbindable and a slave at once, reproduced on 7.1.12 (fixed on `work.move_mount.set_group_unbindable`) |
-| `locked_busy_victims` | `SyncUmountNotBusy` violated | **F5**: propagate_mount_busy() skips a copy with several children, propagate_umount() pulls it out when they are victims plus one overmount, so a synchronous umount succeeds with the copy still referenced, reproduced on 7.1.12 (fixed on `work.umount.busy_victims`; the green runs use the fix's rule and `BusyMirrorOK` checks it against the exact victim set) |
+| `locked_busy_victims`, `parentcand_busy_victims` | `SyncUmountNotBusy` violated | **F5**: propagate_mount_busy() skips a copy with several children, propagate_umount() pulls it out when they are victims plus one overmount, so a synchronous umount succeeds with the copy still referenced, reproduced on 7.1.12 and, by the review of the fix, back to v4.13 (fixed on `work.umount.busy_victims`; the green runs use the fix's rule and `BusyMirrorOK` checks it against the exact victim set; `parentcand_*` scripts the review's case of the victim's parent being a candidate) |
 | `*_doc` | `AlgebraOK` violated | sharedsubtree.rst as written, see the documentation items below |
 | `chain_witness_*`, `locked_witness_*`, `small_witness_*` | witnesses fire | tucks, lock transfers, reparenting, slaves of slaves, skipped masters, expiry, covers, connected and kept locked mounts all occur |
 
